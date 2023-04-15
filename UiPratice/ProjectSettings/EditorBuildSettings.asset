@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/UIPracticeGuide.unity
     guid: 22e752a9ecf7e6546a3958cedcd45dea
   - enabled: 1
-    path: Assets/Scenes/UIPracticeCookie.unity
+    path: Assets/Scenes/UIPracticegaro.unity
     guid: 6895c9f94721a5e4286309e7f1c2946c
   m_configObjects: {}

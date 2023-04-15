@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 676138681}
   - component: {fileID: 676138680}
   m_Layer: 5
-  m_Name: UICookie
+  m_Name: UIHorizental
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,8 +396,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -645, y: 93}
-  m_SizeDelta: {x: 435.9, y: 147.5}
+  m_AnchoredPosition: {x: -482.61072, y: -126.03668}
+  m_SizeDelta: {x: 760.6785, y: 585.5734}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &676138680
 MonoBehaviour:
@@ -984,7 +984,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uCFE0\uD0B9\uB364"
+  m_Text: "\uAC00\uB85C"
 --- !u!222 &1726136859
 CanvasRenderer:
   m_ObjectHideFlags: 0
