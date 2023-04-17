@@ -14,7 +14,9 @@ public class ControlMove : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+
     {
+
         if (Input.GetKey(KeyCode.W))
         {
             transform.position += new Vector3(0.0f, 0.0f, 0.1f);
