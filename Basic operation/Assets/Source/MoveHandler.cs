@@ -8,6 +8,9 @@ public class MoveHandler : MonoBehaviour
     void Start()
     {
         
+      
+        Vector3 vec = new Vector3(5, 5, 5); // 벡터 값 
+        transform.Translate(vec);
     }
 
     // Update is called once per frame
