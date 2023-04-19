@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
-
+    public GameManager gameManager;
     public float maxSpeed;
     public float jumpPower;
+   
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
+    CapsuleCollider2D capsuleCollider;
     Animator anim;
 
 
@@ -17,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();    
     }
 
@@ -39,7 +43,11 @@ public class PlayerMove : MonoBehaviour
         }
 
         //방향전환
-        spriteRenderer.flipX = (Input.GetAxisRaw("Horizontal")== -1);
+        if (Input.GetButton("Horizontal"))
+        {
+            spriteRenderer.flipX = (Input.GetAxisRaw("Horizontal") == -1);
+
+        }
 
         //애니메이션 전환
 
@@ -80,7 +88,7 @@ public class PlayerMove : MonoBehaviour
             {
                 if (rayHit.distance < 0.7f)
                 {
-                    Debug.Log(rayHit.collider.name);
+                   // Debug.Log(rayHit.collider.name);
                     anim.SetBool("isJumping", false);
         
                 }
@@ -90,4 +98,93 @@ public class PlayerMove : MonoBehaviour
         
         
     }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag =="Trap" || collision.gameObject.tag == "Monster")
+        {
+            if(rigid.velocity.y<0 && transform.position.y> collision.transform.position.y+0.3 && collision.gameObject.tag == "Monster")
+            {
+                Onattack(collision.gameObject);
+            }
+            else
+            {
+                OnDamaged(collision.transform.position);
+
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Coin")
+        {
+            bool isBronze = collision.gameObject.name.Contains("Bronze");
+            bool isSilver = collision.gameObject.name.Contains("Silver");
+            bool isGold = collision.gameObject.name.Contains("Gold");
+            Debug.Log(isBronze.ToString() + isSilver.ToString()+ isGold.ToString());
+            if (isBronze)
+                gameManager.stagescore += 50;
+            else if (isSilver)
+                gameManager.stagescore += 100;
+            else if (isGold)
+                gameManager.stagescore += 300;
+            collision.gameObject.SetActive(false);
+            Debug.Log(gameManager.stagescore);
+
+
+        }
+        else if (collision.tag == "Finish")
+        {
+            gameManager.NextStage();
+        }
+    }
+
+    void OnDamaged(Vector2 targetPos)
+    {
+        gameObject.layer = 10;
+        gameManager.HealthDown();
+        spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
+        rigid.AddForce(new Vector2(dirc, 1)*15, ForceMode2D.Impulse);
+
+        Invoke("OffDamaged", 1);
+
+        //피격 애니메이션
+        anim.SetTrigger("Damaged");
+    }
+    void OffDamaged()
+    {
+        gameObject.layer = 7;
+        spriteRenderer.color = new Color(1, 1, 1, 1);
+
+    }
+    void Onattack(GameObject monster)
+    {
+
+        //내 캐릭터에 가해질 반발력
+        rigid.AddForce(Vector2.up*5,ForceMode2D.Impulse);
+
+        //몬스터한테 가할 행동 
+        EnemyMove enemyMove =  monster.GetComponent<EnemyMove>();
+        enemyMove.OnDamaged();
+    }
+    public void OnDie()
+    {
+        //알파수정
+        spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        //꺼꾸로 뒤집어짐
+        spriteRenderer.flipY = true;
+        //콜라이더 오프 
+        capsuleCollider.enabled = false;
+        //죽음 이펙트 점프
+        rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+
+        Time.timeScale = 0;
+    }
+
+    public void VelocityZero()
+    {
+        rigid.velocity = Vector2.zero;
+    }
+
 }

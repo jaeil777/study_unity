@@ -7,15 +7,19 @@ public class EnemyMove : MonoBehaviour
     Rigidbody2D rigid;
     public int nextMove;
     float nextMoveTime;
+    BoxCollider2D boxcolider;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    
 
     // Start is called before the first frame update
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();    
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        boxcolider = GetComponent<BoxCollider2D>();
+       
         ChooseNextMove();
     }
 
@@ -56,7 +60,7 @@ public class EnemyMove : MonoBehaviour
     
     void Turn()
     {
-        Debug.Log("¾È¸ÂÀ½");
+    
         nextMove *= -1;
         CancelInvoke("ChooseNextMove");
         Invoke("ChooseNextMove", nextMoveTime);
@@ -67,4 +71,19 @@ public class EnemyMove : MonoBehaviour
 
 
     }
+
+    public void OnDamaged()
+    {
+        spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        spriteRenderer.flipY = true;
+        boxcolider.enabled = false;
+        rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+        Invoke("DeAttack", 3);
+
+    }
+    void DeAttack()
+    {
+        gameObject.SetActive(false);
+    }
+    
 }

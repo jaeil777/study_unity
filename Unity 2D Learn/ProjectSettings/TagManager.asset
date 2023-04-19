@@ -4,9 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Floor
   - Monster
   - Item
+  - Trap
+  - Floor
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -15,12 +17,12 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Player
   - PlatForm
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - PlayerDamaged
+  - Finsh
+  - Coin
   - 
   - 
   - 
