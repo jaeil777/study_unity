@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public Text UITotalScore;
     public Text UIStageScore;
     public Text UIStage;
+    public Text UIClear;
+    public Button UIRetryButton;
+    public Button UIRestartButton;
     public Image[] UIHealth;
 
 
@@ -25,6 +28,45 @@ public class GameManager : MonoBehaviour
     {
         UITotalScore.text = "TOTAL"+(totalscore + stagescore).ToString();
         UIStageScore.text = "STAGE"+ stagescore.ToString();
+    }
+
+    public void OnClickUIRestartButton()
+    {
+        stages[stageIndex].SetActive(false);
+        stageIndex = 0;
+        health = 3;
+        for (int i = 0; i < UIHealth.Length; i++)
+        {
+            UIHealth[i].color = new Color(1, 1, 1);
+        }
+        stages[stageIndex].SetActive(true);
+        UIStage.text = "STAGE" + (stageIndex + 1);
+        UIRetryButton.gameObject.SetActive(false);
+        UIRestartButton.gameObject.SetActive(false);
+        UIClear.gameObject.SetActive(false);
+        if(Time.timeScale == 0)
+            Time.timeScale = 1f;
+        player.OnRvive();
+        PlayerReposition();
+
+    }
+
+    public void OnClickUIRetryButton()
+    {
+
+        health = 3;
+        for (int i = 0; i < UIHealth.Length; i++)
+        {
+            UIHealth[i].color = new Color(1, 1, 1);
+        }
+        UIRetryButton.gameObject.SetActive(false);
+        UIRestartButton.gameObject.SetActive(false);
+        UIClear.gameObject.SetActive(false);
+        if (Time.timeScale == 0)
+            Time.timeScale = 1f;
+        player.OnRvive();
+        PlayerReposition();
+
     }
     public void NextStage()
     {
@@ -40,12 +82,18 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            UIStage.gameObject.SetActive(false);
+            UIClear.text = "STAGE CLEAR";
+            UIClear.gameObject.SetActive(true);
+            UIRetryButton.gameObject.SetActive(true);
+            UIRestartButton.gameObject.SetActive(true);
             Time.timeScale = 0;
             
             Debug.Log("게임클리어");
+
         }
         
-
+        
         totalscore += stagescore;
         stagescore = 0; 
     }
@@ -58,6 +106,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            UIClear.text = "STAGE FAIELD";
+            UIClear.gameObject.SetActive(true);
+            UIRetryButton.gameObject.SetActive(true);
+            UIRestartButton.gameObject.SetActive(true);
             player.OnDie();
 
         }
@@ -77,4 +129,5 @@ public class GameManager : MonoBehaviour
         player.transform.position = new Vector3(-6, 2.5f, 0);
         player.VelocityZero();
     }
+
 }

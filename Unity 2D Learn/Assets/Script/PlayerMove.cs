@@ -129,7 +129,7 @@ public class PlayerMove : MonoBehaviour
             else if (isGold)
                 gameManager.stagescore += 300;
             collision.gameObject.SetActive(false);
-            Debug.Log(gameManager.stagescore);
+
 
 
         }
@@ -178,8 +178,20 @@ public class PlayerMove : MonoBehaviour
         capsuleCollider.enabled = false;
         //죽음 이펙트 점프
         rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+        
+        
+    }
+    public void OnRvive()
+    {
+        //알파수정
+        spriteRenderer.color = new Color(1, 1, 1);
+        //다시돌림
+        spriteRenderer.flipY = false;
+        //콜라이더온
+        capsuleCollider.enabled = true;
+      
 
-        Time.timeScale = 0;
+
     }
 
     public void VelocityZero()
