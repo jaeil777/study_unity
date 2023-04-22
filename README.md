@@ -1,2 +1,2 @@
 # study_unity
-for study unity and c#
+유니티 공부를 하며 잡다 한 파일 을 모아둔 곳입니다 
