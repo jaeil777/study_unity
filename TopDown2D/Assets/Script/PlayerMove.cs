@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public class PlayerMove : MonoBehaviour
 {
     public float Speed;
+    public GameManager manager;
     float h;
     float v;
     Rigidbody2D rigid;
@@ -25,14 +26,14 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
+        h = manager.isAction ? 0 : Input.GetAxisRaw("Horizontal");
+        v = manager.isAction ? 0 : Input.GetAxisRaw("Vertical");
 
 
-        bool hDown = Input.GetButtonDown("Horizontal");
-        bool vDown = Input.GetButtonDown("Vertical");
-        bool hUp = Input.GetButtonUp("Horizontal");
-        bool vUp = Input.GetButtonUp("Vertical");
+        bool hDown = manager.isAction ? false : Input.GetButtonDown("Horizontal");
+        bool vDown = manager.isAction ? false : Input.GetButtonDown("Vertical");
+        bool hUp = manager.isAction ? false : Input.GetButtonUp("Horizontal");
+        bool vUp = manager.isAction ? false : Input.GetButtonUp("Vertical");
 
 
   
@@ -98,7 +99,7 @@ public class PlayerMove : MonoBehaviour
         //오브젝트 스캔
         if (Input.GetButtonDown("Jump")&&scanObject !=  null)
         {
-            Debug.Log("이거는" + scanObject.name);
+            manager.Action(scanObject);
 
         }
     }
