@@ -2600,8 +2600,7 @@ GameObject:
   - component: {fileID: 811314713}
   - component: {fileID: 811314712}
   - component: {fileID: 811314715}
-  - component: {fileID: 811314716}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: NpcLuna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2705,20 +2704,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &811314716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 811314711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c9aa5176420ffa4e801ea5c061d7ed7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 1000
-  isNpc: 1
 --- !u!1 &858512610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2924,7 +2909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1027698995
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3192,8 +3177,7 @@ GameObject:
   - component: {fileID: 1269481232}
   - component: {fileID: 1269481231}
   - component: {fileID: 1269481234}
-  - component: {fileID: 1269481235}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: NpcLudo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3297,20 +3281,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1269481235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1269481230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c9aa5176420ffa4e801ea5c061d7ed7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 1001
-  isNpc: 1
 --- !u!1 &1357062740
 GameObject:
   m_ObjectHideFlags: 0
