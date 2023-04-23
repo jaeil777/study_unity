@@ -23,17 +23,17 @@ public class TalkManager : MonoBehaviour
         talkData.Add(100, new string[] { "그냥 책상이다. " });
         talkData.Add(200, new string[] { "무언가가 들어있는 상자이다. " });
         talkData.Add(1000, new string[] { "안녕!! 내이름은 루나야 :0 ", "여기에 처음왔구나? :1","저쪽으로 가봐~:2" });
-        talkData.Add(1001, new string[] { "반갑다! 내이름은 루도 :0 ", "상자를 눌러보렴 :1" });
+        talkData.Add(2000, new string[] { "반갑다! 내이름은 루도 :0 ", "상자를 눌러보렴 :1" });
 
         portraitData.Add(1000 + 0, portraitArr[0]);
         portraitData.Add(1000 + 1, portraitArr[1]);
         portraitData.Add(1000 + 2, portraitArr[2]);
         portraitData.Add(1000 + 3, portraitArr[3]);
 
-        portraitData.Add(1001 + 0, portraitArr[4]);
-        portraitData.Add(1001 + 1, portraitArr[5]);
-        portraitData.Add(1001 + 2, portraitArr[6]);
-        portraitData.Add(1001 + 3, portraitArr[7]);
+        portraitData.Add(2000 + 0, portraitArr[4]);
+        portraitData.Add(2000 + 1, portraitArr[5]);
+        portraitData.Add(2000 + 2, portraitArr[6]);
+        portraitData.Add(2000 + 3, portraitArr[7]);
 
     }
 
