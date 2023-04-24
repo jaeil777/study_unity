@@ -2539,7 +2539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AssetsPPU: 16
-  m_RefResolutionX: 320
+  m_RefResolutionX: 160
   m_RefResolutionY: 160
   m_UpscaleRT: 0
   m_PixelSnapping: 0
@@ -2827,6 +2827,7 @@ GameObject:
   - component: {fileID: 858512611}
   - component: {fileID: 858512613}
   - component: {fileID: 858512612}
+  - component: {fileID: 858512614}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2851,7 +2852,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 30, y: 30}
-  m_SizeDelta: {x: 750, y: -60}
+  m_SizeDelta: {x: 500, y: -60}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &858512612
 MonoBehaviour:
@@ -2875,7 +2876,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -2895,6 +2896,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 858512610}
   m_CullTransparentMesh: 1
+--- !u!114 &858512614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858512610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ac8ea431346b34c8d29f3bf3fa3402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EndCursor: {fileID: 2048569205}
+  charPerSecond: 15
 --- !u!1 &981732854
 GameObject:
   m_ObjectHideFlags: 0
@@ -3030,13 +3045,14 @@ GameObject:
   - component: {fileID: 1027698995}
   - component: {fileID: 1027698997}
   - component: {fileID: 1027698996}
+  - component: {fileID: 1027698998}
   m_Layer: 5
   m_Name: TalkBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1027698995
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3056,7 +3072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 92.47629}
+  m_AnchoredPosition: {x: 0, y: -590}
   m_SizeDelta: {x: -40, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027698996
@@ -3097,6 +3113,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027698994}
   m_CullTransparentMesh: 1
+--- !u!95 &1027698998
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027698994}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 046be151482b77b4892913090471f994, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1092506107
 GameObject:
   m_ObjectHideFlags: 0
@@ -3228,8 +3263,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   talkManager: {fileID: 1404174431}
   questManager: {fileID: 715373575}
+  talkPanelAnim: {fileID: 1027698998}
+  portraitAnim: {fileID: 1558742101}
   talkBox: {fileID: 1027698994}
-  talkText: {fileID: 858512612}
+  prevPortrait: {fileID: 0}
+  talk: {fileID: 858512614}
   portratImg: {fileID: 1558742099}
   scanObject: {fileID: 0}
   talkIndex: 0
@@ -5020,6 +5058,7 @@ GameObject:
   - component: {fileID: 1558742098}
   - component: {fileID: 1558742100}
   - component: {fileID: 1558742099}
+  - component: {fileID: 1558742101}
   m_Layer: 5
   m_Name: PortraitImg
   m_TagString: Untagged
@@ -5084,6 +5123,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558742097}
   m_CullTransparentMesh: 1
+--- !u!95 &1558742101
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558742097}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7af17dc16d77dad4cbd0bd0d1f25bee5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1710390174
 GameObject:
   m_ObjectHideFlags: 0
@@ -9664,7 +9722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2048569206
 RectTransform:
   m_ObjectHideFlags: 0
