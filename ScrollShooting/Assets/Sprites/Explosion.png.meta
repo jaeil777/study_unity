@@ -1,18 +1,27 @@
 fileFormatVersion: 2
-guid: 1b274654f1967224e892dc9c7c1f2625
+guid: 54eba9c24be4c474180c23dcccfd6630
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7034660610512690298
-    second: Boom 0
+      213: 5986030973748356752
+    second: Explosion 0
   - first:
-      213: -8874246152023096229
-    second: Boom 1
+      213: -5600206312213581617
+    second: Explosion 1
   - first:
-      213: 4221536321085816454
-    second: Boom 2
+      213: 3815954189206336483
+    second: Explosion 2
+  - first:
+      213: -3690502768834906923
+    second: Explosion 3
+  - first:
+      213: -49130668184793455
+    second: Explosion 4
+  - first:
+      213: -2330519403281856691
+    second: Explosion 5
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -32,6 +41,7 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -41,11 +51,11 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: -1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -63,10 +73,14 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  applyGammaDecoding: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -120,13 +134,76 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boom 0
+      name: Explosion 0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 25
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4711029429b146a428aa9f2d77d102df
+      internalID: 5986030973748356752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion 1
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 25
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c42cab6d4160bd40848397de7486e7d
+      internalID: -5600206312213581617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion 2
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 25
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b571e3b51a3a7cf41af963ae13592a04
+      internalID: 3815954189206336483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion 3
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 72
-        height: 72
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,20 +211,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7c9a05dd8220a160800000000000000
-      internalID: 7034660610512690298
+      spriteID: 30672c0c751bb43469354f66ba7d85c8
+      internalID: -3690502768834906923
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boom 1
+      name: Explosion 4
       rect:
         serializedVersion: 2
-        x: 73
+        x: 25
         y: 0
-        width: 72
-        height: 72
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,20 +232,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b54494b742858d480800000000000000
-      internalID: -8874246152023096229
+      spriteID: 2ee1b751809f88f4485d7a551a53bed4
+      internalID: -49130668184793455
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boom 2
+      name: Explosion 5
       rect:
         serializedVersion: 2
-        x: 146
+        x: 50
         y: 0
-        width: 72
-        height: 72
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,8 +253,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68ebab8dae8e59a30800000000000000
-      internalID: 4221536321085816454
+      spriteID: cbd1a4fc32ff5514d8c42601fefa879e
+      internalID: -2330519403281856691
       vertices: []
       indices: 
       edges: []
