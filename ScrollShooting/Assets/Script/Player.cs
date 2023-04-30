@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     Animator animator;
 
     public GameManager manager;
+    public bool isHit;
     // Update is called once per frame
 
     public GameObject bulletA;
@@ -43,6 +44,7 @@ public class Player : MonoBehaviour
 
     private void Fire()
     {
+    
         //버튼 안눌렸을때 
         if (!Input.GetButton("Fire1"))
             return;
@@ -114,6 +116,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Horizontal") || Input.GetButtonUp("Horizontal"))
         {
+            
             animator.SetInteger("Input", (int)h);
         }
     }
@@ -136,8 +139,25 @@ public class Player : MonoBehaviour
                     break;
             }
         }else if(collision.gameObject.tag =="Enemy" || collision.gameObject.tag =="EnemyBullet"){
+
+            if (isHit)
+                return;
+            isHit = true;
+            life--;
+            manager.UpdateLifeIcon(life);
             gameObject.SetActive(false);
-            manager.RespawnPlayer();
+            if (life == 0)
+            {
+              
+                manager.GameOver();
+
+            }
+            else if (life >0)
+            {
+             
+                manager.RespawnPlayer();   
+            }
+
 
         }
     }

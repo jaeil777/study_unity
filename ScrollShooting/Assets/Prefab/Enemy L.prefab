@@ -147,6 +147,7 @@ MonoBehaviour:
   enemyName: L
   speed: 1
   health: 30
+  enemyScore: 200
   maxShotDelay: 5
   curShotDelay: 0
   sprites:

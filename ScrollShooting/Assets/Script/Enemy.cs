@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public string enemyName;
     public float speed;
     public int health;
+    public int enemyScore;
 
     public float maxShotDelay;
     public float curShotDelay;
@@ -85,6 +86,9 @@ public class Enemy : MonoBehaviour
 
         if(health <= 0)
         {
+            Player playerLogic = player.GetComponent<Player>();
+            playerLogic.score += enemyScore;
+            
             Destroy(gameObject);
         }
     }
