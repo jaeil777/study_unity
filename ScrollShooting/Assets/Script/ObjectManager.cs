@@ -9,19 +9,24 @@ public class ObjectManager : MonoBehaviour
     public GameObject enemyLPreFab;
     public GameObject enemyMPreFab;
     public GameObject enemySPreFab;
+    public GameObject enemyBPreFab;
     public GameObject itemCoinPreFab;
     public GameObject itemPowerPreFab;
     public GameObject itemBoomPreFab;
     public GameObject bulletPlayerAPreFab;
     public GameObject bulletPlayerBPreFab;
+    public GameObject bulletFollowerPreFab;
     public GameObject bulletEnemyAPreFab;
     public GameObject bulletEnemyBPreFab;
+    public GameObject bulletBossAPreFab;
+    public GameObject bulletBossBPreFab;
 
 
     GameObject[] enemyL;
     GameObject[] enemyM;
     GameObject[] enemyS;
-
+    GameObject[] enemyB;
+        
     GameObject[] itemCoin;
     GameObject[] itemPower;
     GameObject[] itemBoom;
@@ -30,15 +35,18 @@ public class ObjectManager : MonoBehaviour
     GameObject[] bulletPlayerB;
     GameObject[] bulletEnemyA;
     GameObject[] bulletEnemyB;
-
+    GameObject[] bulletBossA;
+    GameObject[] bulletBossB;
+    GameObject[] bulletFollower;
 
     GameObject[] targetPool;
 
     private void Awake()
     {
         enemyL = new GameObject[10];
-        enemyM = new GameObject[10];
-        enemyS = new GameObject[20];
+        enemyM = new GameObject[20];
+        enemyS = new GameObject[40];
+        enemyB = new GameObject[1];
 
         itemCoin = new GameObject[20];
         itemPower = new GameObject[10];
@@ -48,6 +56,10 @@ public class ObjectManager : MonoBehaviour
         bulletPlayerB = new GameObject[100];
         bulletEnemyA = new GameObject[100];
         bulletEnemyB = new GameObject[100];
+        bulletBossA = new GameObject[100];
+        bulletBossB = new GameObject[1000];
+
+        bulletFollower = new GameObject[100];
 
         Generate();
 
@@ -71,6 +83,12 @@ public class ObjectManager : MonoBehaviour
         {
             enemyS[index] = Instantiate(enemySPreFab);
             enemyS[index].SetActive(false);
+        }
+
+        for (int index = 0; index < enemyB.Length; index++)
+        {
+            enemyB[index] = Instantiate(enemyBPreFab);
+            enemyB[index].SetActive(false);
         }
 
         for (int index = 0; index < itemCoin.Length; index++)
@@ -114,6 +132,25 @@ public class ObjectManager : MonoBehaviour
             bulletEnemyB[index] = Instantiate(bulletEnemyBPreFab);
             bulletEnemyB[index].SetActive(false);
         }
+
+        for (int index = 0; index < bulletFollower.Length; index++)
+        {
+            bulletFollower[index] = Instantiate(bulletFollowerPreFab);
+            bulletFollower[index].SetActive(false);
+        }
+
+
+        for (int index = 0; index < bulletBossA.Length; index++)
+        {
+            bulletBossA[index] = Instantiate(bulletBossAPreFab);
+            bulletBossA[index].SetActive(false);
+        }
+
+        for (int index = 0; index < bulletBossB.Length; index++)
+        {
+            bulletBossB[index] = Instantiate(bulletBossBPreFab);
+            bulletBossB[index].SetActive(false);
+        }
     }
 
     public GameObject MakeObj(string type)
@@ -129,6 +166,9 @@ public class ObjectManager : MonoBehaviour
                 break;
             case "enemyS":
                 targetPool = enemyS;
+                break;
+            case "enemyB":
+                targetPool = enemyB;
                 break;
             case "itemCoin":
                 targetPool = itemCoin;
@@ -151,7 +191,15 @@ public class ObjectManager : MonoBehaviour
             case "bulletEnemyB":
                 targetPool = bulletEnemyB;
                 break;
-
+            case "bulletFollower":
+                targetPool = bulletFollower;
+                break;
+            case "bulletBossA":
+                targetPool = bulletBossA;
+                break;
+            case "bulletBossB":
+                targetPool = bulletBossB;
+                break;
 
 
 
@@ -182,6 +230,9 @@ public class ObjectManager : MonoBehaviour
             case "enemyS":
                 targetPool = enemyS;
                 break;
+            case "enemyB":
+                targetPool = enemyB;
+                break;
             case "itemCoin":
                 targetPool = itemCoin;
                 break;
@@ -203,7 +254,15 @@ public class ObjectManager : MonoBehaviour
             case "bulletEnemyB":
                 targetPool = bulletEnemyB;
                 break;
-
+            case "bulletFollower":
+                targetPool = bulletFollower;
+                break;
+            case "bulletBossA":
+                targetPool = bulletBossA;
+                break;
+            case "bulletBossB":
+                targetPool = bulletBossB;
+                break;
 
 
         }

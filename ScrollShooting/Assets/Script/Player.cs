@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     public GameObject bulletA;
     public GameObject bulletB;
     public GameObject boomEffect;
+
+    public GameObject[] followers;
     private void Awake()
     {
             animator = GetComponent<Animator>();
@@ -131,7 +133,7 @@ public class Player : MonoBehaviour
                 rigidL.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
                 curShotDelay = 0;
                 break;
-            case 3:
+            default:
                 GameObject bulletRR = objectManager.MakeObj("bulletPlayerA");
                 bulletRR.transform.position = transform.position + Vector3.right * 0.25f;
             
@@ -234,8 +236,13 @@ public class Player : MonoBehaviour
                     if(power == maxPower)
                     {
                         score += 500;
-                    }else
-                    power++;
+                    }
+                    else
+                    {
+                        power++;
+                        AddFlower();
+                    }
+                    
                     break;
                 case "Boom":
                     if (boom == maxBoom)
@@ -252,6 +259,24 @@ public class Player : MonoBehaviour
             }
             collision.gameObject.SetActive(false);
         }
+    }
+
+    void AddFlower()
+    {
+        if(power == 4)
+        {
+            followers[0].SetActive(true);
+        } else if (power == 5)
+            
+            {
+                followers[1].SetActive(true);
+            }
+        else if (power == 6)
+
+        {
+            followers[2].SetActive(true);
+        }
+
     }
     void OffBoomEffect()
     {

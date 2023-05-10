@@ -5,6 +5,14 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int dmg;
+    public bool isRotate;
+    private void Update()
+    {
+        if (isRotate)
+        {
+            transform.Rotate(Vector3.forward * 10);
+        }
+    }
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {

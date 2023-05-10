@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         spawnList = new List<Spawn>();
-        enemyObjs = new string[] {"enemyS" , "enemyM" , "enemyL" };
+        enemyObjs = new string[] {"enemyS" , "enemyM" , "enemyL", "enemyB" };
         playerLogic =player.GetComponent<Player>();
         ReadSpawnFile();
 
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         while (stringReader != null)
         {
             string line = stringReader.ReadLine();
-            Debug.Log(line);
+
             if (line == null)
             {
                 break;
@@ -96,6 +96,9 @@ public class GameManager : MonoBehaviour
 
             case "L":
                 enemyIndex = 2;
+                break;
+            case "B":
+                enemyIndex = 3;
                 break;
         }
         int enemyPoint = spawnList[spawnIndex].point; 
