@@ -8,6 +8,12 @@ using System.Runtime.InteropServices.ComTypes;
 
 public class GameManager : MonoBehaviour
 {
+    public int stage;
+    public Animator StageAnim;
+    public Animator ClearAnim;
+    public Animator FadeAnim;
+
+    public Transform playerPos;
     public string[] enemyObjs;
     public Transform[] spawnPoints;
     Player playerLogic;
@@ -20,7 +26,7 @@ public class GameManager : MonoBehaviour
     public Image[] boomImage;
     public GameObject gameOverSet;
     public ObjectManager objectManager;
-
+    
 
     public List<Spawn> spawnList;
     public int spawnIndex;
@@ -30,9 +36,42 @@ public class GameManager : MonoBehaviour
         spawnList = new List<Spawn>();
         enemyObjs = new string[] {"enemyS" , "enemyM" , "enemyL", "enemyB" };
         playerLogic =player.GetComponent<Player>();
+        StageStart();
+
+
+    }
+    public void StageStart()
+    {
+        StageAnim.GetComponent<Text>().text = "STAGE "+stage+"\n"+"START";
+        //Stage UI Load
+        StageAnim.SetTrigger("On");
+        FadeAnim.SetTrigger("In");
+        //Enemy Spawn File Read
         ReadSpawnFile();
 
+        //Fade In
+    }
 
+    public void StageEnd()
+    {
+        ClearAnim.GetComponent<Text>().text = "STAGE " + stage + "\n" + "Clear";
+        ClearAnim.SetTrigger("On");
+
+        //Stage Clear UI Load
+
+      
+
+        //Fade Out
+        FadeAnim.SetTrigger("Out");
+        //Player Repoision
+        player.transform.position = playerPos.position;
+
+        //Stage Incrasment
+        stage++;
+        if (stage > 2)
+            Invoke("GameOver", 6); 
+        else
+        Invoke("StageStart", 3);
     }
     void ReadSpawnFile()
     {
@@ -41,7 +80,7 @@ public class GameManager : MonoBehaviour
        spawnIndex = 0;
         spawnEnd = false;
         // 리스폰 파일읽기
-        TextAsset textFile = Resources.Load("Stage0") as TextAsset;
+        TextAsset textFile = Resources.Load("Stage "+stage) as TextAsset;
         StringReader stringReader = new StringReader(textFile.text);
         // 리스폰 데이터 생성
 
@@ -109,6 +148,7 @@ public class GameManager : MonoBehaviour
         Enemy enemyLogic = enemy.GetComponent<Enemy>();
         enemyLogic.player = player;
         enemyLogic.objectManager = objectManager;
+        enemyLogic.gameManager = this;
         if (enemyPoint == 6 || enemyPoint == 8)
         { //Right Spawn
             enemy.transform.Rotate(Vector3.back * 90);
@@ -136,6 +176,16 @@ public class GameManager : MonoBehaviour
     public void RespawnPlayer()
     {
         Invoke("RespawnPlayerExe", 2f);
+
+    }
+
+    public void CallExplosion(Vector3 pos, string type)
+    {
+        GameObject explosion = objectManager.MakeObj("explosion");
+        Explosion explosionLogic = explosion.GetComponent<Explosion>();
+
+        explosion.transform.position= pos;
+        explosionLogic.StartExplosion(type);
 
     }
 

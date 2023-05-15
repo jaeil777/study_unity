@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Player : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class Player : MonoBehaviour
     public bool isTouchLeft;
     public bool isTouchRight;
     Animator animator;
+    SpriteRenderer spriteRenderer;
 
     public GameManager gameManager;
     public ObjectManager objectManager;
@@ -33,9 +36,50 @@ public class Player : MonoBehaviour
     public GameObject boomEffect;
 
     public GameObject[] followers;
+
+    public bool respawnTime;
+
+
+    public bool[] joyControl;
+    public bool isControl;
+
+    public bool isButtonA;
+    public bool isButtonB;
     private void Awake()
     {
             animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnEnable()
+    {
+        Unbeattable();
+        Invoke("Unbeattable", 3);
+
+    }
+
+    void Unbeattable()
+    {
+        respawnTime = !respawnTime;
+        if(respawnTime)
+        {
+            respawnTime = true;
+            spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+
+            for(int index=0; index<followers.Length; index++)
+            {
+                followers[index].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
+            }
+        }
+        else
+        {
+            respawnTime=false;
+            spriteRenderer.color = new Color(1, 1, 1, 1);
+            for (int index = 0; index < followers.Length; index++)
+            {
+                followers[index].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            }
+        }
     }
     void Update()
     {
@@ -52,8 +96,10 @@ public class Player : MonoBehaviour
     }
     void Boom()
     {
-        if (!Input.GetButton("Jump"))
+        if (!isButtonB)
             return;
+       // if (!Input.GetButton("Jump"))
+         //   return;
         if (isBoomTimes)
             return;
         if (boom == 0)
@@ -68,24 +114,47 @@ public class Player : MonoBehaviour
         GameObject[] enemiesL = objectManager.GetPool("enemyL");
         GameObject[] enemiesM = objectManager.GetPool("enemyM");
         GameObject[] enemiesS = objectManager.GetPool("enemyS");
+        GameObject[] enemiesB = objectManager.GetPool("enemyB");
         for (int index = 0; index < enemiesL.Length; index++)
         {
-            Enemy enemyLogic = enemiesL[index].GetComponent<Enemy>();
-            enemyLogic.OnHit(1000);
+            if (enemiesL[index].activeSelf)
+            {
+                Enemy enemyLogic = enemiesL[index].GetComponent<Enemy>();
+                enemyLogic.OnHit(1000);
+            }
+           
+        
         }
         for (int index = 0; index < enemiesM.Length; index++)
         {
-            Enemy enemyLogic = enemiesM[index].GetComponent<Enemy>();
-            enemyLogic.OnHit(1000);
+            if (enemiesM[index].activeSelf)
+            {
+                Enemy enemyLogic = enemiesM[index].GetComponent<Enemy>();
+                enemyLogic.OnHit(1000);
+            }
+            
         }
         for (int index = 0; index < enemiesS.Length; index++)
         {
-            Enemy enemyLogic = enemiesS[index].GetComponent<Enemy>();
-            enemyLogic.OnHit(1000);
+            if (enemiesS[index].activeSelf)
+            {
+                Enemy enemyLogic = enemiesS[index].GetComponent<Enemy>();
+                enemyLogic.OnHit(1000);
+            }
+        }
+        for (int index = 0; index < enemiesB.Length; index++)
+        {
+            if (enemiesB[index].activeSelf)
+            {
+                Enemy enemyLogic = enemiesB[index].GetComponent<Enemy>();
+                enemyLogic.OnHit(1000);
+            }
         }
         //
         GameObject[] bulletsA = objectManager.GetPool("bulletEnemyA");
         GameObject[] bulletsB = objectManager.GetPool("bulletEnemyB");
+        GameObject[] bulletBossA = objectManager.GetPool("bulletBossA");
+        GameObject[] bulletBossB = objectManager.GetPool("bulletBossB");
         for (int index = 0; index < bulletsA.Length; index++)
         {
             bulletsA[index].SetActive(false);
@@ -94,12 +163,36 @@ public class Player : MonoBehaviour
         {
             bulletsB[index].SetActive(false);
         }
+        for (int index = 0; index < bulletBossA.Length; index++)
+        {
+            bulletBossA[index].SetActive(false);
+        }
+        for (int index = 0; index < bulletBossB.Length; index++)
+        {
+            bulletBossB[index].SetActive(false);
+        }
         isBoomTimes = true;
+        isButtonB = false;
+    }
 
+    public void ButtonADown()
+    {
+        isButtonA = true;
+    }
+
+    public void ButtonAUp()
+    {
+        isButtonA = false;
+    }
+
+    public void ButtonBDown()
+    {
+        isButtonB = true;
     }
     void Fire()
     {
-    
+        if (!isButtonA)
+            return;
         //버튼 안눌렸을때 
         if (!Input.GetButton("Fire1"))
             return;
@@ -162,16 +255,47 @@ public class Player : MonoBehaviour
 
     */
     }
+    public void JoyPanel(int type)
+    {
+        for(int index =0; index<9; index++)
+        {
+            joyControl[index] = index == type;
+        }
+    }
 
+    public void JoyDown()
+    {
+        isControl = true;
+    }
+    public void JoyUp()
+    {
+        isControl = false;
+    }
     void Move()
     {
         float h = Input.GetAxisRaw("Horizontal");
-        if ((isTouchRight && h == 1) || (isTouchLeft && h == -1))
+        float v = Input.GetAxisRaw("Vertical");
+
+        if(joyControl[0]) { h = -1; v = 1; }
+        if (joyControl[1]) { h = 0; v = 1; }
+        if (joyControl[2]) { h = 1; v = 1; }
+        if (joyControl[3]) { h = -1; v = 0; }
+        if (joyControl[4]) { h = 0; v = 0; }
+        if (joyControl[5]) { h = 1; v = 0; }
+        if (joyControl[6]) { h = -1; v = -1; }
+        if (joyControl[7]) { h = 0; v = -1; }
+        if (joyControl[8]) { h = 1; v = -1; }
+
+
+
+
+
+        if ((isTouchRight && h == 1) || (isTouchLeft && h == -1)|| !isControl)
         {
             h = 0;
         }
-        float v = Input.GetAxisRaw("Vertical");
-        if ((isTouchTop && v == 1) || (isTouchBottom && v == -1))
+
+        if ((isTouchTop && v == 1) || (isTouchBottom && v == -1)|| !isControl)
         {
             v = 0;
         }
@@ -185,6 +309,8 @@ public class Player : MonoBehaviour
             animator.SetInteger("Input", (int)h);
         }
     }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -205,11 +331,14 @@ public class Player : MonoBehaviour
             }
         }else if(collision.gameObject.tag =="Enemy" || collision.gameObject.tag =="EnemyBullet"){
 
+            if (respawnTime)
+                return;
             if (isHit)
                 return;
             isHit = true;
             life--;
             gameManager.UpdateLifeIcon(life);
+            gameManager.CallExplosion(transform.position, "P");
             gameObject.SetActive(false);
             if (life == 0)
             {

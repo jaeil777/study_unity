@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Enemy : MonoBehaviour
 {
@@ -25,12 +26,15 @@ public class Enemy : MonoBehaviour
     public GameObject itemBoom;
     public GameObject itemCoin;
 
+    public GameManager gameManager;
+
     public int patternIndex;
     public int curPatternCount;
     public int[] maxPatternCount;
 
     void Awake()
     {
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         if(enemyName == "B")
@@ -47,7 +51,7 @@ public class Enemy : MonoBehaviour
         switch (enemyName)
         {
             case "B":
-                health = 3000;
+                health = 2000;
 
                 Invoke("Stop", 2.5f);
 
@@ -88,7 +92,11 @@ public class Enemy : MonoBehaviour
 
     void Think()
     {
+        if (!gameObject.activeSelf)
+        {
 
+            return;
+        }
 
         patternIndex = patternIndex == 3 ? 0 : patternIndex + 1;
         curPatternCount = 0;
@@ -114,6 +122,11 @@ public class Enemy : MonoBehaviour
     }
     void FireFoward()
     {
+        if (!gameObject.activeSelf)
+        {
+
+            return;
+        }
         //앞으로 네발 발사
         GameObject bulletR = objectManager.MakeObj("bulletBossB");
         bulletR.transform.position = transform.position + Vector3.right * 0.5f;
@@ -146,7 +159,13 @@ public class Enemy : MonoBehaviour
     }
     void FireShot()
     {
-        for(int index =0; index <5;  index++)
+        if (!gameObject.activeSelf)
+        {
+
+            return;
+        }
+
+        for (int index =0; index <5;  index++)
         {
             GameObject bullet = objectManager.MakeObj("bulletBossA");
             bullet.transform.position = transform.position;
@@ -161,7 +180,7 @@ public class Enemy : MonoBehaviour
         }
 
         //플레이어 방향 샷건
-        Debug.Log("1");
+
         curPatternCount++;
         if (curPatternCount < maxPatternCount[patternIndex])
             Invoke("FireShot", 2);
@@ -173,6 +192,11 @@ public class Enemy : MonoBehaviour
     }
     void FireArc()
     {
+        if (!gameObject.activeSelf)
+        {
+
+            return;
+        }
         //부채모양으로발사
         GameObject bullet = objectManager.MakeObj("bulletBossB");
         bullet.transform.position = transform.position;
@@ -195,6 +219,11 @@ public class Enemy : MonoBehaviour
     }
     void FireAround()
     {
+        if (!gameObject.activeSelf)
+        {
+
+            return;
+        }
 
         //원형태전체공격
 
@@ -316,6 +345,12 @@ public class Enemy : MonoBehaviour
             }
             gameObject.SetActive(false);
             transform.rotation = Quaternion.identity;
+            gameManager.CallExplosion(transform.position, enemyName);
+
+            if(enemyName == "B")
+            {
+                gameManager.StageEnd();
+            }
         }
     }
 
